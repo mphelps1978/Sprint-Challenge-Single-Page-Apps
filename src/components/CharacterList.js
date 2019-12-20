@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Axios from "axios";
 import "./character.css";
+import "../index.css";
 import CharacterCard from "./CharacterCard";
+import { Container, Col, Row } from "reactstrap";
 
 const CharacterList = props => {
   const [character, setCharacter] = useState([]);
@@ -22,12 +25,19 @@ const CharacterList = props => {
   }, []);
 
   return (
-    <section className="character-list">
+    <div className="grid-view">
       {character.map(item => (
         <CharacterCard key={item.id} character={item} />
       ))}
-    </section>
+    </div>
   );
 };
 
+const CharacterDetails = ({ character }) => {
+  return (
+    <Link to={`characters/${character.id}`}>
+      <CharacterCard {...character} />
+    </Link>
+  );
+};
 export default CharacterList;
